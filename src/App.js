@@ -37,7 +37,7 @@ function App() {
     <>
       <Navbar mode={mode} toggleMode={toggleMode} />
       <Alert alert={alert} showAlert={showAlert} mode={mode}/>
-            <About />
+            {/* <About /> */}
           <TextUtis mode={mode} alert={alert} showAlert={showAlert}/>
       {/* <Demo/> */}
     </>
