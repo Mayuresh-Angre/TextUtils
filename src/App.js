@@ -1,24 +1,46 @@
-import logo from './logo.svg';
+import { useState } from 'react';
 import './App.css';
+import Navbar from './navbar/Navbar';
+import TextUtis from './textUtis/TextUtis';
+import Alert from './textUtis/Alert';
+import Demo from './textUtis/demo'
+import About from './textUtis/About';
 
 function App() {
+  const [mode,setMode]=useState("light")
+  const toggleMode=()=>{
+    if(mode==='light'){
+      setMode("Dark")
+      document.body.style.backgroundColor='grey'
+      showAlert('Dark mode is on...', 'success')
+    }else{
+      document.body.style.backgroundColor='white'
+      setMode("light")
+      showAlert('Dark mode is off','success')
+    }
+  }
+  const [alert,setAlert]=useState(null)
+  const showAlert=(message,type)=>{
+    setAlert({
+      message:message,
+      type:type
+    })
+    setTimeout(()=>{
+      setAlert(null)
+    },1500)
+  }
+
+
+
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      <Navbar mode={mode} toggleMode={toggleMode} />
+      <Alert alert={alert} showAlert={showAlert} mode={mode}/>
+            <About />
+          <TextUtis mode={mode} alert={alert} showAlert={showAlert}/>
+      {/* <Demo/> */}
+    </>
   );
 }
 
